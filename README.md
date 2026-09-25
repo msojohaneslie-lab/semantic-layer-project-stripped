@@ -149,7 +149,6 @@ There are necessary procedures that need to be checked for validations, and many
       <h4>Features-to-Elements Conversation</h4>
       <ul>
         <li>Feature View - Entity Conversation</li>
-        <li>Feature View - TTL Conversation</li>
         <li>Feature View - Description Conversation</li>
         <li>Feature View - Feature Name Conversation</li>
         <li>Feature - Description Conversation</li>
