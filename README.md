@@ -210,7 +210,7 @@ There are necessary procedures that need to be checked for validations, and many
   </li>
   
   <li>
-      <strong><a href="feature_search/index_dictionary/unused_Index"> unused_index Folder</a></strong>
+      <strong><a href="feature_search/index_dictionary/NOTE.txt"> unused_index Folder</a></strong>
       <br>
       This folder contains historical/legacy indexes which could be useful in future development. 
       <h4>File Explanations:</h4> 
@@ -271,7 +271,7 @@ There are necessary procedures that need to be checked for validations, and many
     </li>
     <li><strong><a href="feature_search/index_extraction/field_extractions.py">field_extractions.py</a></strong>
       <br>
-      This code file is used to extract features information in form of indexes based on feature name. The index contains necessary feature information such as the type,description, and the business logic. The indexID is based on the feature name, where the result is saved in <a href = "feature_search/index_dictionaryNOTE.txt">field_index.json</a> file 
+      This code file is used to extract features information in form of indexes based on feature name. The index contains necessary feature information such as the type,description, and the business logic. The indexID is based on the feature name, where the result is saved in <a href = "feature_search/index_dictionary/NOTE.txt">field_index.json</a> file 
     </li>
     <li>
       <strong><a href="feature_search/index_extraction/extract_sql_for_edit_yaml.py">extract_sql_for_edit_yaml.py</a></strong>
@@ -364,7 +364,7 @@ There are necessary procedures that need to be checked for validations, and many
       <li>
         <strong><a href="feature_search/function_tools/elements_to_features/by_feature_view_info.py">by_feature_view_info.py</a></strong>
         <br>
-        This code provides function that will be used by the agent to search feature view by the elements such as ttl, description, entity, and feature fields. It uses  <strong><a href="feature_search/index_dictionary/feature_index.json">feature_index.json</a>Index </strong> as its keyword searching dictionary and feature_views_descriptions chromaDB collection as its semantic searching dictionary which use cosine-similarity to check the similarity
+        This code provides function that will be used by the agent to search feature view by the elements such as ttl, description, entity, and feature fields. It uses  <strong><a href="feature_search/index_dictionary/NOTE.txt">feature_index.json</a>Index </strong> as its keyword searching dictionary and feature_views_descriptions chromaDB collection as its semantic searching dictionary which use cosine-similarity to check the similarity
         There are four types of 'modes' where LLM can choose and decide when running this function:
         <ul>
           <li>description: If users provide information in form of description text and ask whether that feature view exists or not</li>
@@ -381,7 +381,7 @@ There are necessary procedures that need to be checked for validations, and many
     <li>
         <strong><a href="feature_search/function_tools/elements_to_features/by_feature_field_sql.py">by_feature_field_sql.py</a></strong>
         <br>
-        This code provides function that finds similarity between the user given query SQL with the vector embeddings. It uses  <strong><a href="feature_search/SQL_parser/sql_embeddings.json">sql_embeddings.json</a>Index </strong> as its semantic searching dictionary.
+        This code provides function that finds similarity between the user given query SQL with the vector embeddings. It uses  <strong><a href="feature_search/SQL_parser/NOTE.txt">sql_embeddings.json</a>Index </strong> as its semantic searching dictionary.
         The agent will check using cosine-similarity to check whether similar feature SQL exists
       Note: For future development, it will use sql_embeddings_collection ChromaDB Collection as its searching index (After its validated)
     </li>
@@ -395,7 +395,7 @@ There are necessary procedures that need to be checked for validations, and many
       <li>
         <strong><a href="feature_search/function_tools/entity_information/entity_to_elements.py">entity_to_elements.py</a></strong>
         <br>
-        This code provides function that will be used by the agent to retrieve entity information such as the join key, description, and business logic. It uses  <strong><a href="feature_search/index_dictionary/entities_index.json">entities_index.json</a>Index </strong> as its keyword searching dictionary.
+        This code provides function that will be used by the agent to retrieve entity information such as the join key, description, and business logic. It uses  <strong><a href="feature_search/index_dictionary/NOTE.txt">entities_index.json</a>Index </strong> as its keyword searching dictionary.
         There are four types of 'modes' where LLM can choose and decide when running this function:
         <ul>
           <li>description: If users ask about feature descriptions</li>
@@ -445,7 +445,7 @@ There are necessary procedures that need to be checked for validations, and many
             Write Existing YAML: If users choose to write new feature in existing YAML
           <ul>
             <li><a href = "feature_search/function_tools/feature_registrations/writing/write_feature_field_existing_yaml.py">write_feature_field_existing_yaml.py</a> : Add the new feature to the existing YAML, including the description and business logic</li>
-            <li><a href = "feature_search/function_tools/feature_registrations/writing/sql_edit_planner.py">sql_edit_planner.py</a> : LLM will decide how to change the SQL structure (LLM will return a change plan). Uses <a href = "feature_search/index_dictionary/feature_view_sql_structure_index.json">feature_view_sql_structure_index.json</a> index</li>
+            <li><a href = "feature_search/function_tools/feature_registrations/writing/sql_edit_planner.py">sql_edit_planner.py</a> : LLM will decide how to change the SQL structure (LLM will return a change plan). Uses <a href = "feature_search/index_dictionary/NOTE.txt">feature_view_sql_structure_index.json</a> index</li>
             <li><a href = "feature_search/function_tools/feature_registrations/writing/write_sql_existing_yaml.py">write_sql_existing_yaml.py</a> : Python will receive the change plan, then execute it to change the SQL in the YAML</li>
           </ul>
         </li>
