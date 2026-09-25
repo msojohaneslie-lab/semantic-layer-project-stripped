@@ -1,0 +1,29 @@
+# Environment
+.env
+.env.*
+
+#ChromaDB
+feature_search/chromadb/*
+!feature_search/chromadb/*.py
+
+#Feature YAML
+feature_search/yaml_list/*.yaml
+
+#Entity YAML
+feature_search/entities/*.yaml
+
+#Index dictionary
+feature_search/index_dictionary/*
+!feature_search/index_dictionary/*.txt
+
+#__py_cache__
+__pycache__/
+*.py[cod]
+#SQL_parser
+feature_search/SQL_parser/*.json
+
+#vscode
+.vscode/
+
+#local database
+*.db

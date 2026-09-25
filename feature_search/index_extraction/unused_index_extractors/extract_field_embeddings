@@ -1,0 +1,134 @@
+from google import genai
+import yaml
+import json
+from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+
+# --------------------------------
+# SETUP
+# --------------------------------
+
+BASE_DIR = Path(__file__).parents[2]
+
+load_dotenv(BASE_DIR / ".env")
+
+api_key = os.getenv("GOOGLE_API_KEY")
+
+if not api_key:
+    raise ValueError("GOOGLE_API_KEY was not found")
+
+client = genai.Client(
+    api_key=api_key
+)
+
+YAML_FOLDER = BASE_DIR / "yaml_list"
+
+EMBEDDING_MODEL = "gemini-embedding-001"
+
+
+# CREATE TEXT FOR ONE FIELD
+
+def create_field_text(field):
+
+    return "\n".join([
+        f"Field name: {field.get('name', '')}",
+        f"Description: {field.get('description', '')}",
+        f"Business logic: {field.get('business_logic', '')}"
+    ])
+
+
+# BUILD EMBEDDINGS
+def build_embeddings():
+
+    output_path = BASE_DIR / "field_embeddings.json"
+
+    # Load existing embeddings
+    if output_path.exists():
+
+        with open(output_path, "r", encoding="utf-8") as file:
+            embeddings = json.load(file)
+
+    else:
+
+        embeddings = {}
+
+    # LOOP THROUGH YAML FILES
+    for yaml_path in YAML_FOLDER.glob("*.yaml"):
+
+        filename = yaml_path.name
+
+        print(f"\nProcessing: {filename}")
+
+        # READ YAML
+        with open(yaml_path, "r", encoding="utf-8") as file:
+            data = yaml.safe_load(file)
+
+        feature_name = data.get("name", "")
+
+        # LOOP THROUGH FIELDS
+
+        for field in data.get("feature_fields", []):
+
+            field_name = field.get("name", "")
+
+            if not field_name:
+                continue
+
+            # Unique identifier
+            key = f"{feature_name}::{field_name}"
+
+            # --------------------------------
+            # SKIP ALREADY EMBEDDED FIELD
+            # --------------------------------
+
+            if key in embeddings:
+
+                print(f"Skipping: {key}")
+                continue
+
+            print(f"Embedding: {key}")
+
+            # --------------------------------
+            # CREATE TEXT
+            # --------------------------------
+
+            text = create_field_text(field)
+
+            # --------------------------------
+            # CREATE EMBEDDING
+            # --------------------------------
+
+            result = client.models.embed_content(
+                model=EMBEDDING_MODEL,
+                contents=text
+            )
+
+            vector = result.embeddings[0].values
+
+            # --------------------------------
+            # SAVE
+            # --------------------------------
+
+            embeddings[key] = {
+                "field_name": field_name,
+                "feature_name": feature_name,
+                "yaml_file": filename,
+                "text": text,
+                "embedding": vector
+            }
+
+            # --------------------------------
+            # SAVE IMMEDIATELY
+            # --------------------------------
+
+            with open(output_path, "w", encoding="utf-8") as file:
+                json.dump(embeddings, file)
+
+            print(f"Saved: {key}")
+
+
+# RUN
+if __name__ == "__main__":
+    build_embeddings()
