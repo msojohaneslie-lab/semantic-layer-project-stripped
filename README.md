@@ -138,7 +138,7 @@ There are necessary procedures that need to be checked for validations, and many
 </li>
 
 <li>
-  <h4><a href="feature_search/index_dictionary">Index Dictionary</a></h4>
+  <h4><a href="feature_search/index_dictionary">Index Dictionary [Confidential] </a></h4>
   <p>This folder contains the index lists, which are used for searching features.</p>
   <h4>Index Files:</h4>
   <ul>
